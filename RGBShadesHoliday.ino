@@ -91,6 +91,7 @@ functionList effectListOne[] = {rider,
 // Christmas patterns
 functionList effectListTwo[] = {scrollTextZero,
                                 candycaneSlantbars,
+                                checkerboard,
                                 scrollTextOne,
                                 snow,
                                 scrollTextTwo,
