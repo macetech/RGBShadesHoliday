@@ -637,7 +637,7 @@ void checkerboard() {
 
 
   CRGB colorOne = ColorFromPalette(currentPalette, checkerFader);
-  CRGB colorTwo = ColorFromPalette(currentPalette, checkerFader+63);
+  CRGB colorTwo = ColorFromPalette(currentPalette, checkerFader+64);
 
   for (byte x = 0; x < kMatrixWidth; x++) {
     for (byte y = 0; y < kMatrixHeight; y++) {

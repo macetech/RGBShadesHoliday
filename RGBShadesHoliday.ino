@@ -129,6 +129,12 @@ void setup() {
     runMode = EEPROM.read(4);
   }
 
+  // check if invalid value in EEPROM (not previously initialized)
+  if (runMode > 3) {
+    runMode = 0;
+    saveEEPROMvals();
+  }
+
   // write FastLED configuration data
   FastLED.addLeds<CHIPSET, LED_PIN, COLOR_ORDER>(leds, LAST_VISIBLE_LED + 1);
 
@@ -162,7 +168,6 @@ void setup() {
 
   if (currentEffect > (numEffects - 1)) currentEffect = 0;
   effectInit = false;
-  
 }
 
 
