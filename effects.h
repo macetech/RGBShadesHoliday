@@ -344,6 +344,7 @@ void scrollText(byte message, byte style, CRGB fgColor, CRGB bgColor, byte repea
 }
 
 // leds run around the periphery of the shades, changing color every go 'round
+// modified from code by @terrag42
 void shadesOutline() {
   static boolean erase = false;
   static uint8_t x, y = 0;
