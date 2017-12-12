@@ -1,3 +1,5 @@
+#include <Arduino.h>
+
 //   RGB Shades Holiday Code
 //   Copyright (c) 2015 macetech LLC
 //   This software is provided under the MIT License (see license.txt)
@@ -89,7 +91,8 @@ functionList effectListOne[] = {rider,
                               };
 
 // Christmas patterns
-functionList effectListTwo[] = {scrollTextZero,
+functionList effectListTwo[] = {barfight,
+                                scrollTextZero,
                                 candycaneSlantbars,
                                 checkerboard,
                                 scrollTextOne,
@@ -225,7 +228,9 @@ void loop()
   
 
   // run a fade effect
-  if (fadingActive) fadeTo(fadeBaseColor,1);
+  if (fadeActive > 0) {
+    fadeAll(fadeActive);
+  }
 
   FastLED.show(); // send the contents of the led memory to the LEDs
 

@@ -217,7 +217,7 @@ void confetti() {
     effectInit = true;
     effectDelay = 10;
     selectRandomPalette();
-    fadingActive = true;
+    fadeActive = 2;
     fadeBaseColor = CRGB::Black;
   }
 
@@ -252,7 +252,7 @@ void slantBars() {
 }
 
 
-byte repCount = 0;
+
 
 #define charSpacing 2
 // Scroll a text string
@@ -343,37 +343,26 @@ void scrollText(byte message, byte style, CRGB fgColor, CRGB bgColor, byte repea
 
 }
 
-// leds run around the periphery of the shades, changing color every go 'round
+//leds run around the periphery of the shades, changing color every go 'round
 void shadesOutline() {
-  static boolean erase = false;
-  static uint8_t x, y = 0;
-  static uint8_t currentColor = 0;
+  
+  static uint8_t x = 0;
+  
   //startup tasks
   if (effectInit == false) {
     effectInit = true;
-    erase = false;
-    x = 0;
-    effectDelay = 15;
+    effectDelay = 25;
     FastLED.clear();
     currentPalette = RainbowColors_p;
+    fadeActive = 0;
   }
 
-  
-  const uint8_t OutlineTable[] = {
-    0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 43,
-    44, 67, 66, 65, 64, 63, 50, 37, 21, 22, 36, 51, 62, 61, 60, 59,
-    58, 57, 30, 29
-  };
-  leds[OutlineTable[x]] = currentPalette[currentColor];
-  if (erase)
-    leds[OutlineTable[x]] = CRGB::Black;
+  CRGB pixelColor = CHSV(cycleHue, 255, 255);
+  leds[OutlineMap(x)] = pixelColor;
+
   x++;
-  if (x == (sizeof(OutlineTable))) {
-    erase = !erase;
-    x = 0;
-    currentColor += random8(3, 6);
-    if (currentColor > 15) currentColor -= 16;
-  }
+  if (x > (OUTLINESIZE-1)) x = 0;
+  
 }
 
 
@@ -389,7 +378,7 @@ void spinPlasma() {
     effectInit = true;
     effectDelay = 10;
     selectRandomPalette();
-    fadingActive = false;
+    fadeActive = 0;
   }
 
   // Calculate current center of plasma pattern (can be offscreen)
@@ -450,7 +439,7 @@ void fireworks() {
     effectInit = true;
     effectDelay = 5;
     gSkyburst = 1;
-    fadingActive = false;
+    fadeActive = 0;
   }
 
 
@@ -502,7 +491,7 @@ void xmasThreeDee() {
   if (effectInit == false) {
     effectInit = true;
     effectDelay = 250;
-    fadingActive = false;
+    fadeActive = 0;
   }
 
   swap = !swap;
@@ -534,7 +523,7 @@ void snow() {
   if (effectInit == false) {
     effectInit = true;
     effectDelay = 20;
-    fadingActive = false;
+    fadeActive = 0;
   }
 
   CRGB snowColor = CRGB::White;
@@ -566,7 +555,7 @@ void candycaneSlantbars() {
   if (effectInit == false) {
     effectInit = true;
     effectDelay = 5;
-    fadingActive = false;
+    fadeActive = 0;
   }
 
   for (byte x = 0; x < kMatrixWidth; x++) {
@@ -649,5 +638,39 @@ void checkerboard() {
 
   
 }
+
+void barfight() {
+
+  static byte barpos[16];
+  
+  // startup tasks
+  if (effectInit == false) {
+    effectInit = true;
+    effectDelay = 50;
+    for (byte i = 0; i < kMatrixWidth; i++) {
+      barpos[i] = random8(0,7);
+    }
+  }
+
+  for (byte x = 0; x < kMatrixWidth; x++) {
+    for (byte y = 0; y < kMatrixHeight; y++) {
+      if (y < barpos[x]) {
+        leds[XY(x,y)] = CRGB::Red;
+      } else {
+        leds[XY(x,y)] = CRGB::Green;
+      }
+    }
+
+    byte tempIncr = random(0,3);
+    if (barpos[x] > 0 && tempIncr == 0) barpos[x]--;
+    if (barpos[x] < 6 && tempIncr == 2) barpos[x]++;
+
+    
+  }
+
+}
+
+
+
 
 

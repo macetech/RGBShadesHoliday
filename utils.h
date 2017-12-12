@@ -13,8 +13,9 @@ boolean autoCycle = true; // flag for automatic effect changes
 boolean eepromOutdated = false; // flag for when EEPROM may need to be updated
 byte currentBrightness = STARTBRIGHTNESS; // 0-255 will be scaled to 0-MAXBRIGHTNESS
 boolean initialized = false; // switch to true when startup tasks are finished
-boolean fadingActive = false;
+uint8_t fadeActive = 0;
 byte runMode = 0;
+byte repCount = 0;
 
 CRGB fadeBaseColor = CRGB::Black;
 
@@ -149,7 +150,8 @@ void cyclePattern() {
       cycleMillis = currentMillis;
       if (++currentEffect >= numEffects) currentEffect = 0; // loop to start of effect list
       effectInit = false; // trigger effect initialization when new effect is selected
-      fadingActive = false;
+      fadeActive = 0;
+      repCount = 0;
 }
 
 
