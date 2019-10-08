@@ -4,7 +4,7 @@ const char string0[] PROGMEM = "MERRY CHRISTMAS  ";
 const char string1[] PROGMEM = "HO HO ";
 const char string2[] PROGMEM = "HAPPY HOLIDAYS  ";
 const char string3[] PROGMEM = "HAPPY NEW YEAR  ";
-const char string4[] PROGMEM = "2018  ";
+const char string4[] PROGMEM = "2020  ";
 
 
 const char * const stringArray[] PROGMEM = {

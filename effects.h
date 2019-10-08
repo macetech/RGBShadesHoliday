@@ -243,7 +243,7 @@ void slantBars() {
 
   for (byte x = 0; x < kMatrixWidth; x++) {
     for (byte y = 0; y < kMatrixHeight; y++) {
-      leds[XY(x, y)] = CHSV(cycleHue, 255, quadwave8(x * 32 + y * 32 + slantPos));
+      leds[XY(x, y)] = CHSV(cycleHue, 255, triwave8(x * 32 + y * 32 + slantPos));
     }
   }
 
